@@ -1,0 +1,29 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./store.db"
+}
+
+model Chat {
+  id                BigInt    @id
+  messages          Message[]
+  replyToMention    Boolean   @default(true)
+  replyRandomly     Boolean   @default(false)
+  adminOnlyCommands Boolean   @default(true)
+  adminOnlySettings Boolean   @default(true)
+  replyChance       Int       @default(0)
+  mentionReplyCount Int       @default(0)
+  randomReplyCount  Int       @default(0)
+}
+
+model Message {
+  id     Int
+  chatId BigInt
+  text   String
+  Chat   Chat   @relation(fields: [chatId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  @@id([id, chatId])
+}
