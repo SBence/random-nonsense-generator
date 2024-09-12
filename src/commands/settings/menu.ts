@@ -1,80 +1,47 @@
 import {
-  getChatData,
   toggleAdminOnlyCommands,
   toggleAdminOnlySettings,
   toggleReplyRandomly,
   toggleReplyToMention,
 } from "@database";
 import { Menu } from "@grammyjs/menu";
-import { getMenuMessageText } from "./getMenuMessageText.js";
-import isAdmin from "./isAdmin.js";
+import { menuButtonCallback, menuButtonText } from "./menuButtonHelpers.js";
+import { ChatSettingToggleError } from "./ToggleFailedError.js";
 
 export const settingsMenu = new Menu("settings", { autoAnswer: false })
   .text(
+    async (ctx) => menuButtonText(ctx, "replyToMention", "Reply to mentions"),
     async (ctx) => {
-      if (!ctx.chat) return "Reply to mentions";
-      const replyToMention = (await getChatData(ctx.chat.id)).replyToMention;
-      return `${replyToMention ? "🟢" : "🔴"} Reply to mentions`;
-    },
-    async (ctx) => {
-      const chatId = ctx.chat?.id;
-      if (!chatId)
-        return await ctx.answerCallbackQuery("❌ Failed to toggle setting.");
-
-      const [chatData, senderIsAdmin] = await Promise.all([
-        getChatData(chatId),
-        isAdmin(ctx),
-      ]);
-
-      if (
-        (chatData.adminOnlySettings || chatData.adminOnlyCommands) &&
-        !senderIsAdmin
-      )
-        return ctx.answerCallbackQuery(
-          "🚫 This option can only be changed by administrators.",
+      let replyToMention;
+      try {
+        replyToMention = await menuButtonCallback(
+          ctx,
+          "replyToMention",
+          toggleReplyToMention,
         );
-
-      await toggleReplyToMention(chatId);
-      await ctx.editMessageText(await getMenuMessageText(chatId), {
-        parse_mode: "HTML",
-      });
-
-      const replyToMention = (await getChatData(chatId)).replyToMention;
+      } catch (error) {
+        if (error instanceof ChatSettingToggleError) return;
+        else throw error;
+      }
       await ctx.answerCallbackQuery(
         `✔️ ${replyToMention ? "Enabled" : "Disabled"} replying to mentions.`,
       );
     },
   )
   .text(
+    async (ctx) => menuButtonText(ctx, "replyRandomly", "Reply randomly"),
     async (ctx) => {
-      if (!ctx.chat) return "Reply randomly";
-      const replyRandomly = (await getChatData(ctx.chat.id)).replyRandomly;
-      return `${replyRandomly ? "🟢" : "🔴"} Reply randomly`;
-    },
-    async (ctx) => {
-      const chatId = ctx.chat?.id;
-      if (!chatId)
-        return await ctx.answerCallbackQuery("❌ Failed to toggle setting.");
-
-      const [chatData, senderIsAdmin] = await Promise.all([
-        getChatData(chatId),
-        isAdmin(ctx),
-      ]);
-
-      if (
-        (chatData.adminOnlySettings || chatData.adminOnlyCommands) &&
-        !senderIsAdmin
-      )
-        return ctx.answerCallbackQuery(
-          "🚫 This option can only be changed by administrators.",
+      let replyRandomly;
+      try {
+        replyRandomly = await menuButtonCallback(
+          ctx,
+          "replyRandomly",
+          toggleReplyRandomly,
         );
-
-      await toggleReplyRandomly(chatId);
-      await ctx.editMessageText(await getMenuMessageText(chatId), {
-        parse_mode: "HTML",
-      });
-
-      const replyRandomly = (await getChatData(chatId)).replyRandomly;
+      } catch (error) {
+        if (error instanceof ChatSettingToggleError) return;
+        else throw error;
+      }
       await ctx.answerCallbackQuery(
         `✔️ ${replyRandomly ? "Enabled" : "Disabled"} random replies.`,
       );
@@ -82,28 +49,27 @@ export const settingsMenu = new Menu("settings", { autoAnswer: false })
   )
   .row()
   .text(
+    async (ctx) =>
+      menuButtonText(
+        ctx,
+        "adminOnlySettings",
+        "Admin-only settings",
+        "🔒",
+        "🔓",
+      ),
     async (ctx) => {
-      if (!ctx.chat) return "Admin-only settings";
-      const adminOnlySettings = (await getChatData(ctx.chat.id))
-        .adminOnlySettings;
-      return `${adminOnlySettings ? "🔒" : "🔓"} Admin-only settings`;
-    },
-    async (ctx) => {
-      const chatId = ctx.chat?.id;
-      if (!chatId)
-        return await ctx.answerCallbackQuery("❌ Failed to toggle setting.");
-
-      if (!(await isAdmin(ctx)))
-        return ctx.answerCallbackQuery(
-          "🚫 This option can only be changed by administrators.",
+      let adminOnlySettings;
+      try {
+        adminOnlySettings = await menuButtonCallback(
+          ctx,
+          "adminOnlySettings",
+          toggleAdminOnlySettings,
+          true,
         );
-
-      await toggleAdminOnlySettings(chatId);
-      await ctx.editMessageText(await getMenuMessageText(chatId), {
-        parse_mode: "HTML",
-      });
-
-      const adminOnlySettings = (await getChatData(chatId)).adminOnlySettings;
+      } catch (error) {
+        if (error instanceof ChatSettingToggleError) return;
+        else throw error;
+      }
       await ctx.answerCallbackQuery(
         `✔️ Settings can now be changed ${adminOnlySettings ? "only by admins" : "by everyone"}.`,
       );
@@ -111,28 +77,27 @@ export const settingsMenu = new Menu("settings", { autoAnswer: false })
   )
   .row()
   .text(
+    async (ctx) =>
+      menuButtonText(
+        ctx,
+        "adminOnlyCommands",
+        "Admin-only bot commands",
+        "🔒",
+        "🔓",
+      ),
     async (ctx) => {
-      if (!ctx.chat) return "Admin-only bot commands";
-      const adminOnlyCommands = (await getChatData(ctx.chat.id))
-        .adminOnlyCommands;
-      return `${adminOnlyCommands ? "🔒" : "🔓"} Admin-only bot commands`;
-    },
-    async (ctx) => {
-      const chatId = ctx.chat?.id;
-      if (!chatId)
-        return await ctx.answerCallbackQuery("❌ Failed to toggle setting.");
-
-      if (!(await isAdmin(ctx)))
-        return ctx.answerCallbackQuery(
-          "🚫 This option can only be changed by administrators.",
+      let adminOnlyCommands;
+      try {
+        adminOnlyCommands = await menuButtonCallback(
+          ctx,
+          "adminOnlyCommands",
+          toggleAdminOnlyCommands,
+          true,
         );
-
-      await toggleAdminOnlyCommands(chatId);
-      await ctx.editMessageText(await getMenuMessageText(chatId), {
-        parse_mode: "HTML",
-      });
-
-      const adminOnlyCommands = (await getChatData(chatId)).adminOnlyCommands;
+      } catch (error) {
+        if (error instanceof ChatSettingToggleError) return;
+        else throw error;
+      }
       await ctx.answerCallbackQuery(
         `✔️ Bot commands can now be used ${adminOnlyCommands ? "only by admins" : "by everyone"}.`,
       );
