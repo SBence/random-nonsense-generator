@@ -9,7 +9,8 @@
     "skipLibCheck": true,
     "paths": {
       "@config": ["./src/config.ts"],
-      "@database": ["./src/database.ts"]
+      "@database": ["./src/database.ts"],
+      "@customTypes/*": ["./src/types/*"]
     }
   }
 }

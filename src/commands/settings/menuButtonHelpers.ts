@@ -1,15 +1,9 @@
-import { getChatData } from "@database";
-import { Chat } from "@prisma/client";
+import { BooleanChatField } from "@customTypes/ChatFields.js";
+import { getChatData, toggleChatSetting } from "@database";
 import { Context } from "grammy";
 import { ChatSettingToggleError } from "./ToggleFailedError.js";
 import { getMenuMessageText } from "./getMenuMessageText.js";
 import isAdmin from "./isAdmin.js";
-
-type BooleanFields<T> = {
-  [K in keyof T]: T[K] extends boolean ? K : never;
-}[keyof T];
-
-type BooleanChatFields = Pick<Chat, BooleanFields<Chat>>;
 
 async function isChatSettingsAdminOnly(chatId: number) {
   const chatData = await getChatData(chatId);
@@ -18,7 +12,7 @@ async function isChatSettingsAdminOnly(chatId: number) {
 
 export async function menuButtonText(
   ctx: Context,
-  settingKey: keyof BooleanChatFields,
+  settingKey: keyof BooleanChatField,
   settingName: string,
   enabledEmoji = "🟢",
   disabledEmoji = "🔴",
@@ -30,8 +24,7 @@ export async function menuButtonText(
 
 export async function menuButtonCallback(
   ctx: Context,
-  settingKey: keyof BooleanChatFields,
-  toggleFunction: (chatId: number) => Promise<void>,
+  settingKey: keyof BooleanChatField,
   forceAdminOnly = false,
 ) {
   const chatId = ctx.chat?.id;
@@ -50,7 +43,7 @@ export async function menuButtonCallback(
     throw new ChatSettingToggleError("User is not admin");
   }
 
-  await toggleFunction(chatId);
+  await toggleChatSetting(chatId, settingKey);
   await ctx.editMessageText(await getMenuMessageText(chatId), {
     parse_mode: "HTML",
   });

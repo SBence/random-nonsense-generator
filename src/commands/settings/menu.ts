@@ -1,9 +1,3 @@
-import {
-  toggleAdminOnlyCommands,
-  toggleAdminOnlySettings,
-  toggleReplyRandomly,
-  toggleReplyToMention,
-} from "@database";
 import { Menu } from "@grammyjs/menu";
 import { menuButtonCallback, menuButtonText } from "./menuButtonHelpers.js";
 import { ChatSettingToggleError } from "./ToggleFailedError.js";
@@ -14,11 +8,7 @@ export const settingsMenu = new Menu("settings", { autoAnswer: false })
     async (ctx) => {
       let replyToMention;
       try {
-        replyToMention = await menuButtonCallback(
-          ctx,
-          "replyToMention",
-          toggleReplyToMention,
-        );
+        replyToMention = await menuButtonCallback(ctx, "replyToMention");
       } catch (error) {
         if (error instanceof ChatSettingToggleError) return;
         else throw error;
@@ -33,11 +23,7 @@ export const settingsMenu = new Menu("settings", { autoAnswer: false })
     async (ctx) => {
       let replyRandomly;
       try {
-        replyRandomly = await menuButtonCallback(
-          ctx,
-          "replyRandomly",
-          toggleReplyRandomly,
-        );
+        replyRandomly = await menuButtonCallback(ctx, "replyRandomly");
       } catch (error) {
         if (error instanceof ChatSettingToggleError) return;
         else throw error;
@@ -63,7 +49,6 @@ export const settingsMenu = new Menu("settings", { autoAnswer: false })
         adminOnlySettings = await menuButtonCallback(
           ctx,
           "adminOnlySettings",
-          toggleAdminOnlySettings,
           true,
         );
       } catch (error) {
@@ -91,7 +76,6 @@ export const settingsMenu = new Menu("settings", { autoAnswer: false })
         adminOnlyCommands = await menuButtonCallback(
           ctx,
           "adminOnlyCommands",
-          toggleAdminOnlyCommands,
           true,
         );
       } catch (error) {

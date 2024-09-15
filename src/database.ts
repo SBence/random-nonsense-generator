@@ -1,4 +1,5 @@
 import { MAX_MESSAGES_PER_CHAT } from "@config";
+import { BooleanChatField, NumberChatField } from "@customTypes/ChatFields.js";
 import { PrismaClient } from "@prisma/client";
 import { Message } from "grammy/types";
 
@@ -31,14 +32,6 @@ export async function resetReplyChance(chatId: number) {
     where: { id: chatId },
     create: { id: chatId, replyChance: 0 },
     update: { replyChance: 0 },
-  });
-}
-
-export async function incrementReplyChance(chatId: number) {
-  await database.chat.upsert({
-    where: { id: chatId },
-    create: { id: chatId, replyChance: 1 },
-    update: { replyChance: { increment: 1 } },
   });
 }
 
@@ -95,53 +88,24 @@ export function getChatMessageCount(chatId: number | bigint) {
   return database.message.count({ where: { chatId } });
 }
 
-export async function toggleReplyRandomly(chatId: number) {
+export async function toggleChatSetting(
+  chatId: number,
+  setting: keyof BooleanChatField,
+) {
   const chatData = await getChatData(chatId);
   await database.chat.update({
     where: { id: chatId },
-    data: {
-      replyRandomly: !chatData.replyRandomly,
-      replyChance: chatData.replyRandomly ? 0 : undefined,
-    },
+    data: { [setting]: !chatData[setting] },
   });
 }
 
-export async function toggleReplyToMention(chatId: number) {
-  const chatData = await getChatData(chatId);
-  await database.chat.update({
-    where: { id: chatId },
-    data: { replyToMention: !chatData.replyToMention },
-  });
-}
-
-export async function toggleAdminOnlyCommands(chatId: number) {
-  const chatData = await getChatData(chatId);
-  await database.chat.update({
-    where: { id: chatId },
-    data: { adminOnlyCommands: !chatData.adminOnlyCommands },
-  });
-}
-
-export async function toggleAdminOnlySettings(chatId: number) {
-  const chatData = await getChatData(chatId);
-  await database.chat.update({
-    where: { id: chatId },
-    data: { adminOnlySettings: !chatData.adminOnlySettings },
-  });
-}
-
-export async function incrementMentionReplyCount(chatId: number) {
+export async function incrementChatCounter(
+  chatId: number,
+  counter: keyof NumberChatField,
+) {
   await database.chat.upsert({
     where: { id: chatId },
-    create: { id: chatId, mentionReplyCount: 1 },
-    update: { mentionReplyCount: { increment: 1 } },
-  });
-}
-
-export async function incrementRandomReplyCount(chatId: number) {
-  await database.chat.upsert({
-    where: { id: chatId },
-    create: { id: chatId, randomReplyCount: 1 },
-    update: { randomReplyCount: { increment: 1 } },
+    create: { id: chatId, [counter]: 1 },
+    update: { [counter]: { increment: 1 } },
   });
 }

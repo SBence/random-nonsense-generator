@@ -2,9 +2,7 @@ import { MIN_REQUIRED_MESSAGES, RANDOM_REPLY_START_CHANCE } from "@config";
 import {
   getChatData,
   getChatMessageCount,
-  incrementMentionReplyCount,
-  incrementRandomReplyCount,
-  incrementReplyChance,
+  incrementChatCounter,
   resetReplyChance,
   saveMessage,
 } from "@database";
@@ -40,7 +38,7 @@ export async function textMessageHandler(ctx: Context) {
         const generatedText = await generateText(chatId);
         void ctx.reply(generatedText);
         await Promise.all([
-          incrementMentionReplyCount(chatId),
+          incrementChatCounter(chatId, "mentionReplyCount"),
           resetReplyChance(chatId),
         ]);
       } catch (error) {
@@ -58,14 +56,14 @@ export async function textMessageHandler(ctx: Context) {
         const generatedText = await generateText(chatId);
         void ctx.reply(generatedText);
         await Promise.all([
-          incrementRandomReplyCount(chatId),
+          incrementChatCounter(chatId, "randomReplyCount"),
           resetReplyChance(chatId),
         ]);
       } catch (error) {
         // Can fail silently as a reply isn't guaranteed in this case, so the user doesn't expect one.
       }
     } else {
-      await incrementReplyChance(chatId);
+      await incrementChatCounter(chatId, "replyChance");
     }
   }
 }
