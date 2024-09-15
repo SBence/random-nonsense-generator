@@ -19,7 +19,9 @@ export async function menuButtonText(
 ) {
   if (!ctx.chat) return settingName;
   const settingState = (await getChatData(ctx.chat.id))[settingKey];
-  return `${settingState ? enabledEmoji : disabledEmoji} ${settingName}`;
+  const enabledString = `${enabledEmoji} Enabled`;
+  const disabledString = `${disabledEmoji} Disabled`;
+  return `${settingName}: ${settingState ? enabledString : disabledString}`;
 }
 
 export async function menuButtonCallback(

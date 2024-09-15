@@ -18,6 +18,7 @@ export const settingsMenu = new Menu("settings", { autoAnswer: false })
       );
     },
   )
+  .row()
   .text(
     async (ctx) => menuButtonText(ctx, "replyRandomly", "Reply randomly"),
     async (ctx) => {
