@@ -43,9 +43,11 @@ async function bootstrap(token: string) {
   bot.on("message:text", textMessageHandler);
   bot.on("edit:text", textEditHandler);
   bot.on("my_chat_member", async (ctx) => {
-    isChatMemberMap[ctx.myChatMember.new_chat_member.status]
-      ? await newChat(ctx.chat.id)
-      : await deleteChat(ctx.chat.id);
+    if (isChatMemberMap[ctx.myChatMember.new_chat_member.status]) {
+      await newChat(ctx.chat.id);
+    } else {
+      await deleteChat(ctx.chat.id);
+    }
   });
 
   await cleanup();
@@ -57,4 +59,8 @@ async function bootstrap(token: string) {
 }
 
 const token = process.env.TOKEN;
-token ? void bootstrap(token) : console.error("Token not found in .env file");
+if (token) {
+  void bootstrap(token);
+} else {
+  console.error("Token not found in .env file");
+}
