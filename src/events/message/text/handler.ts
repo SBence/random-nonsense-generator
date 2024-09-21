@@ -41,7 +41,7 @@ export async function textMessageHandler(ctx: Context) {
           incrementChatCounter(chatId, "mentionReplyCount"),
           resetReplyChance(chatId),
         ]);
-      } catch (error) {
+      } catch {
         void ctx.reply("I'm at a loss for words. Literally.");
       }
     } else {
@@ -59,7 +59,7 @@ export async function textMessageHandler(ctx: Context) {
           incrementChatCounter(chatId, "randomReplyCount"),
           resetReplyChance(chatId),
         ]);
-      } catch (error) {
+      } catch {
         // Can fail silently as a reply isn't guaranteed in this case, so the user doesn't expect one.
       }
     } else {
