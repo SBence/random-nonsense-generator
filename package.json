@@ -4,8 +4,8 @@
   "main": "src/index.ts",
   "type": "module",
   "scripts": {
-    "dev:start": "prisma db push && rm -r build/dev || true && esbuild src/index.ts --bundle --sourcemap --platform=node --packages=external --outfile=build/dev/index.cjs && node build/dev/index.cjs",
-    "build": "prisma migrate dev && node ./esbuild.config.js",
+    "dev:start": "prisma db push && rm -r build/dev 2> /dev/null || true && esbuild src/index.ts --bundle --sourcemap --platform=node --packages=external --outfile=build/dev/index.cjs && node build/dev/index.cjs",
+    "build": "prisma migrate dev && rm -r build/prod 2> /dev/null || true && node ./esbuild.config.js",
     "prod:apply-migrations": "prisma migrate deploy && prisma generate",
     "prisma-studio": "prisma studio",
     "formatting:check": "yarn prettier --check .",
