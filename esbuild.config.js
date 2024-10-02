@@ -1,29 +1,42 @@
 import * as esbuild from "esbuild";
-import { cpSync, rmSync } from "fs";
+import { cpSync, readFileSync, rmSync, writeFileSync } from "fs";
 
 const sourceFolder = "./src";
-const prodFolder = "./build/prod";
-const filesToCopy = [
-  "package.json",
-  "yarn.lock",
-  "prisma/schema.prisma",
-  "prisma/migrations",
-];
+const buildFolder = "./build/prod";
+const filesToCopy = ["yarn.lock", "prisma/schema.prisma", "prisma/migrations"];
+
+const cleanBuildFolder = () => ({
+  name: "clean-build-folder",
+  setup(build) {
+    build.onStart(() => {
+      rmSync(buildFolder, { recursive: true, force: true });
+    });
+  },
+});
 
 const copyFiles = () => ({
   name: "copy-files",
   setup(build) {
-    build.onStart(() => {
-      rmSync(prodFolder, { recursive: true, force: true });
-    });
     build.onEnd(() => {
       for (const file of filesToCopy) {
         try {
-          cpSync(`./${file}`, `${prodFolder}/${file}`, { recursive: true });
+          cpSync(`./${file}`, `${buildFolder}/${file}`, { recursive: true });
         } catch (e) {
           console.error("Failed to copy file:", e);
         }
       }
+    });
+  },
+});
+
+const copyProdPackageJSON = () => ({
+  name: "copy-prod-package-json",
+  setup(build) {
+    build.onEnd(() => {
+      const packageJson = JSON.parse(readFileSync("package.json"));
+      delete packageJson.devDependencies;
+      packageJson.main = "index.cjs";
+      writeFileSync(`${buildFolder}/package.json`, JSON.stringify(packageJson));
     });
   },
 });
@@ -36,6 +49,6 @@ await esbuild.build({
   minifyWhitespace: true,
   platform: "node",
   packages: "external",
-  outfile: `${prodFolder}/index.cjs`,
-  plugins: [copyFiles()],
+  outfile: `${buildFolder}/index.cjs`,
+  plugins: [cleanBuildFolder(), copyFiles(), copyProdPackageJSON()],
 });
