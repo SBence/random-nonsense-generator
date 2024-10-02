@@ -8,6 +8,8 @@ A Telegram bot to generate messages using Markov chains
 
 Creating a bot is done through [@BotFather](https://t.me/BotFather). See the [official documentation](https://core.telegram.org/bots/features#creating-a-new-bot) for more details.
 
+**Make sure to disable [privacy mode](https://core.telegram.org/bots/features#privacy-mode), otherwise the bot won't be able to store user messages to generate its replies from.**
+
 ### Project installation
 
 1. Install dependencies:
@@ -47,7 +49,7 @@ _The steps below should be done in the deployment environment._
 3. Apply database migrations:
 
    ```sh
-   yarn run apply-migrations
+   yarn run prod:apply-migrations
    ```
 
 4. Run the bot:
@@ -58,7 +60,7 @@ _The steps below should be done in the deployment environment._
 
 ## Usage
 
-### Inviting the bot to your group
+### Adding the bot to your group
 
 The process of adding the bot user is the same as adding any other user.
 
