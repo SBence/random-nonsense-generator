@@ -7,8 +7,8 @@ import {
   saveMessage,
 } from "@database";
 import { Context } from "grammy";
-import checkBotMention from "./checkBotMention.js";
-import generateText from "./generateText.js";
+import checkBotMention from "./utils/checkBotMention.js";
+import generateText from "./utils/generateText.js";
 
 function shouldReplyRandomly(replyChance: number) {
   return !Math.floor(
