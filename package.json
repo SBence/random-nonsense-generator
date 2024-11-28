@@ -8,6 +8,7 @@
     "build": "prisma migrate dev && rm -r build/prod 2> /dev/null || true && node ./esbuild.config.js",
     "prod:apply-migrations": "prisma migrate deploy && prisma generate",
     "prisma-studio": "prisma studio",
+    "lint": "eslint .",
     "formatting:check": "yarn prettier --check .",
     "formatting:apply": "yarn prettier --write ."
   },
