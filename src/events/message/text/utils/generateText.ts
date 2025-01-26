@@ -12,14 +12,11 @@ import MarkovChain, {
 
 const chainConfig: MarkovGenerateOptions = {
   maxTries: MAX_GENERATION_TRIES,
-  filter: (result: MarkovResult) => {
-    return (
-      result.score >= MIN_CHAIN_SCORE &&
-      !result.string.includes("@") &&
-      result.string.length <= MAX_MESSAGE_LENGTH &&
-      !result.string.includes("http")
-    );
-  },
+  filter: (result: MarkovResult) =>
+    result.score >= MIN_CHAIN_SCORE &&
+    !result.string.includes("@") &&
+    result.string.length <= MAX_MESSAGE_LENGTH &&
+    !result.string.includes("http"),
 };
 
 export default async (chatId: number) => {
