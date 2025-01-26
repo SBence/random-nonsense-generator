@@ -6,11 +6,18 @@
   "scripts": {
     "dev:start": "prisma db push && rm -r build/dev 2> /dev/null || true && esbuild src/index.ts --bundle --sourcemap --platform=node --packages=external --outfile=build/dev/index.cjs && node build/dev/index.cjs",
     "build": "prisma migrate dev && rm -r build/prod 2> /dev/null || true && node ./esbuild.config.js",
-    "prod:apply-migrations": "prisma migrate deploy && prisma generate",
-    "prisma-studio": "prisma studio",
     "lint": "eslint .",
-    "formatting:check": "yarn prettier --check .",
-    "formatting:apply": "yarn prettier --write ."
+    "formatting:check": "prettier --check .",
+    "formatting:apply": "prettier --write .",
+    "prod:apply-migrations": "prisma migrate deploy && prisma generate",
+    "prisma-studio": "prisma studio"
+  },
+  "dependencies": {
+    "@grammyjs/menu": "^1.3.0",
+    "@prisma/client": "^6.2.1",
+    "dotenv": "^16.4.7",
+    "grammy": "^1.34.0",
+    "markov-strings": "^3.0.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.18.0",
@@ -23,12 +30,5 @@
     "prisma": "^6.2.1",
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.21.0"
-  },
-  "dependencies": {
-    "@grammyjs/menu": "^1.3.0",
-    "@prisma/client": "^6.2.1",
-    "dotenv": "^16.4.7",
-    "grammy": "^1.34.0",
-    "markov-strings": "^3.0.2"
   }
 }
