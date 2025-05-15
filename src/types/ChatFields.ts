@@ -1,4 +1,4 @@
-import { Chat } from "@prisma/client";
+import { Chat } from "@prismaClient";
 
 type FilterKeyTypes<T, F> = {
   [K in keyof T]: T[K] extends F ? K : never;

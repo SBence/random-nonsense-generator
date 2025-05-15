@@ -1,10 +1,12 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client"
+  output          = "generated" // Also set in: eslint.config.mjs, .gitignore, package.json, tsconfig.json
+  previewFeatures = ["driverAdapters", "queryCompiler", "strictUndefinedChecks"]
 }
 
 datasource db {
   provider = "sqlite"
-  url      = "file:./store.db"
+  url      = env("DATABASE_URL")
 }
 
 model Chat {

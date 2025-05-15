@@ -16,10 +16,10 @@ jobs:
           node-version: "*"
 
       - name: Check formatting
-        run: yarn formatting:check
+        run: yarn lint:formatting
 
       - name: Lint code
-        run: yarn lint
+        run: yarn lint:eslint
 
       - name: Build project
         run: yarn tsc --noEmit
