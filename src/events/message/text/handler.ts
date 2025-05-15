@@ -1,5 +1,6 @@
 import { MIN_REQUIRED_MESSAGES, RANDOM_REPLY_START_CHANCE } from "@config";
 import {
+  database,
   getChatData,
   getChatMessageCount,
   incrementChatCounter,
@@ -26,11 +27,11 @@ export async function textMessageHandler(ctx: Context) {
   if (!checkBotMention(ctx)) await saveMessage(ctx.message);
 
   const chatId = ctx.message.chat.id;
-  const [chatData, chatMessageCount] = await Promise.all([
+  const [chatData, messageCount] = await database.$transaction([
     getChatData(chatId),
     getChatMessageCount(chatId),
   ]);
-  const readyToGenerate = chatMessageCount >= MIN_REQUIRED_MESSAGES;
+  const readyToGenerate = messageCount >= MIN_REQUIRED_MESSAGES;
 
   if (chatData.replyToMention && checkBotMention(ctx)) {
     if (readyToGenerate) {
@@ -38,15 +39,15 @@ export async function textMessageHandler(ctx: Context) {
         const generatedText = await generateText(chatId);
         void ctx.reply(generatedText);
         await Promise.all([
-          incrementChatCounter(chatId, "mentionReplyCount"),
           resetReplyChance(chatId),
+          incrementChatCounter(chatId, "mentionReplyCount"),
         ]);
       } catch {
         void ctx.reply("I'm at a loss for words. Literally.");
       }
     } else {
       await ctx.reply(
-        `Apologies, I still need some more time...\nProgress: <b>${Math.floor((chatMessageCount / MIN_REQUIRED_MESSAGES) * 100).toString()}%</b>`,
+        `Apologies, I still need some more time...\nProgress: <b>${Math.floor((messageCount / MIN_REQUIRED_MESSAGES) * 100).toString()}%</b>`,
         { parse_mode: "HTML" },
       );
     }
@@ -56,11 +57,11 @@ export async function textMessageHandler(ctx: Context) {
         const generatedText = await generateText(chatId);
         void ctx.reply(generatedText);
         await Promise.all([
-          incrementChatCounter(chatId, "randomReplyCount"),
           resetReplyChance(chatId),
+          incrementChatCounter(chatId, "randomReplyCount"),
         ]);
       } catch {
-        // Can fail silently as a reply isn't guaranteed in this case, so the user doesn't expect one.
+        // Can fail silently as a reply isn't guaranteed in this case, so the user doesn't expect one
       }
     } else {
       await incrementChatCounter(chatId, "replyChance");
