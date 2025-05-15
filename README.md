@@ -18,45 +18,43 @@ Creating a bot is done through [@BotFather](https://t.me/BotFather). See the [of
    yarn install
    ```
 
-2. Add your bot token from BotFather to the `.env` file in the project directory:
+2. Add the database URL and your bot token from BotFather to the `.env` file in the project directory:
 
    ```properties
+   DATABASE_URL="file:database/store.db"
    TOKEN=<insert your Telegram bot token here>
    ```
 
 ## Development
 
-### Running the bot
+1. Follow the steps in the [Project installation](#project-installation) section.
+2. Start the bot in development mode:
+
+   ```sh
+   yarn run dev
+   ```
+
+### Generating migrations for production
 
 ```sh
-yarn run dev:start
+yarn run generate-migrations
 ```
 
-### Building for production
-
-```sh
-yarn run build
-```
-
-Build files will be output to `build/prod`.
+> [!IMPORTANT]
+> Make sure to run the command above before every deployment.
 
 ## Deployment
 
-_The steps below should be done in the deployment environment._
+_Follow the steps below in the deployment environment._
 
-1. Copy the contents of the `build/prod` folder to the desired location on the server.
-2. Follow the steps in the [Project installation](#project-installation) section.
-3. Apply database migrations:
-
-   ```sh
-   yarn run prod:apply-migrations
-   ```
-
-4. Run the bot:
+1. Follow the steps in the [Project installation](#project-installation) section.
+2. Build the bot:
 
    ```sh
-   node index.cjs
+   yarn run build
    ```
+
+3. Run `build/index.js` using your preferred method. (For example, to run with Node.js: `node --enable-source-maps build/index.js`)
 
 ## Usage
 

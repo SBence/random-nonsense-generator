@@ -5,7 +5,7 @@ import tseslint from "typescript-eslint";
 
 export default [
   { files: ["**/*.{js,mjs,cjs,ts}"] },
-  { ignores: ["build"] },
+  { ignores: ["build", "**/generated"] },
   {
     languageOptions: {
       globals: globals.node,

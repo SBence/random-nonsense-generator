@@ -17,9 +17,8 @@ export async function settingsHandler(ctx: CommandContext<Context>) {
     isAdmin(ctx),
   ]);
 
-  if (!senderIsAdmin) {
-    if (chatData.adminOnlySettings)
-      void ctx.reply("🚫 This command can only be used by admins.");
+  if (!senderIsAdmin && chatData.adminOnlySettings) {
+    void ctx.reply("🚫 This command can only be used by admins.");
     return;
   }
 

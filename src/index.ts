@@ -1,4 +1,4 @@
-import { deleteChat, getChats, newChat, trimMessagesToLimit } from "@database";
+import { cleanup, deleteChat } from "@database";
 import "dotenv/config";
 import { Bot } from "grammy";
 import { ChatMember } from "grammy/types";
@@ -18,15 +18,6 @@ const isChatMemberMap: Record<ChatMember["status"], boolean> = {
   restricted: true,
 };
 
-async function cleanup() {
-  console.log("🧹⏳ Cleaning up database...");
-  const chatIds = (await getChats(true)).map((chat) => chat.id);
-  for (const chatId of chatIds) {
-    await trimMessagesToLimit(chatId, false);
-  }
-  console.log("🧹✅ Cleanup complete!");
-}
-
 async function bootstrap(token: string) {
   const bot = new Bot(token);
 
@@ -43,14 +34,18 @@ async function bootstrap(token: string) {
   bot.on("message:text", textMessageHandler);
   bot.on("edit:text", textEditHandler);
   bot.on("my_chat_member", async (ctx) => {
+    const chatId = ctx.chat.id;
+
     if (isChatMemberMap[ctx.myChatMember.new_chat_member.status]) {
-      await newChat(ctx.chat.id);
+      // Not adding the chat to the database here, as database operations create it if it doesn't exist
+      console.log(`💬🟢 New chat: ${chatId.toString()}`);
     } else {
-      await deleteChat(ctx.chat.id);
+      await deleteChat(chatId);
     }
   });
 
   await cleanup();
+
   await bot.init();
   console.log(
     `🟢 Running as: ${bot.botInfo.first_name} (@${bot.botInfo.username})`,
@@ -62,5 +57,5 @@ const token = process.env.TOKEN;
 if (token) {
   void bootstrap(token);
 } else {
-  console.error("Token not found in .env file");
+  throw new Error("❌ TOKEN not set in .env file");
 }
