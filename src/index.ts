@@ -1,6 +1,6 @@
 import { cleanup, deleteChat } from "@database";
 import "dotenv/config";
-import { Bot } from "grammy";
+import { Bot, GrammyError } from "grammy";
 import { ChatMember } from "grammy/types";
 import { settingsHandler } from "./commands/settings/handler.js";
 import { settingsMenu } from "./commands/settings/menu.js";
@@ -46,10 +46,18 @@ async function bootstrap(token: string) {
 
   await cleanup();
 
-  await bot.init();
-  console.log(
-    `🟢 Running as: ${bot.botInfo.first_name} (@${bot.botInfo.username})`,
-  );
+  try {
+    await bot.init();
+    console.log(
+      `🟢 Running as: ${bot.botInfo.first_name} (@${bot.botInfo.username})`,
+    );
+  } catch (error) {
+    if (error instanceof GrammyError && error.error_code === 401) {
+      throw new Error("❌ Invalid token set in .env file");
+    }
+    throw error;
+  }
+
   void bot.start();
 }
 
@@ -57,5 +65,5 @@ const token = process.env.TOKEN;
 if (token) {
   void bootstrap(token);
 } else {
-  throw new Error("❌ TOKEN not set in .env file");
+  throw new Error("❌ Token not set in .env file");
 }
