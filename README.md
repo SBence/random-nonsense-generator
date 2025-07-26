@@ -8,7 +8,20 @@ A Telegram bot to generate messages using Markov chains
 
 Creating a bot is done through [@BotFather](https://t.me/BotFather). See the [official documentation](https://core.telegram.org/bots/features#creating-a-new-bot) for more details.
 
-**Make sure to disable [privacy mode](https://core.telegram.org/bots/features#privacy-mode), otherwise the bot won't be able to store user messages to generate its replies from.**
+> [!IMPORTANT]  
+> [Privacy mode](https://core.telegram.org/bots/features#privacy-mode) has to be disabled so that the bot can store user messages to generate its replies from.
+
+#### Setting bot commands
+
+1. Send `/setcommands` to [@BotFather](https://t.me/BotFather).
+2. Select this bot.
+3. Enter the commands that are registered in the bot (using `bot.command()`):
+
+   > settings - Adjust bot settings  
+   > stats - View stats about the bot's activity in your group
+
+> [!IMPORTANT]  
+> Make sure to do the steps above, otherwise users won't be able to configure the bot's settings.
 
 ### Project installation
 
