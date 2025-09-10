@@ -1,7 +1,8 @@
 generator client {
   provider        = "prisma-client"
   output          = "generated" // Also set in: eslint.config.mjs, .gitignore, package.json, tsconfig.json
-  previewFeatures = ["driverAdapters", "queryCompiler", "strictUndefinedChecks"]
+  engineType      = "client"
+  previewFeatures = ["strictUndefinedChecks"]
 }
 
 datasource db {
