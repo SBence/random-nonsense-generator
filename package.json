@@ -28,7 +28,7 @@
   "devDependencies": {
     "@eslint/js": "^9.37.0",
     "@types/node": "^22.18.10",
-    "esbuild": "^0.25.10",
+    "esbuild": "^0.25.11",
     "eslint": "^9.37.0",
     "eslint-config-prettier": "^10.1.8",
     "globals": "^16.3.0",
