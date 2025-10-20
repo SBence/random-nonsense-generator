@@ -26,10 +26,10 @@
     "markov-strings": "^3.0.2"
   },
   "devDependencies": {
-    "@eslint/js": "^9.37.0",
+    "@eslint/js": "^9.38.0",
     "@types/node": "^22.18.11",
     "esbuild": "^0.25.11",
-    "eslint": "^9.37.0",
+    "eslint": "^9.38.0",
     "eslint-config-prettier": "^10.1.8",
     "globals": "^16.3.0",
     "prettier": "^3.6.2",
