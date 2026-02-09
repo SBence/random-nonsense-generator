@@ -22,12 +22,12 @@
     "@prisma/client": "^6.19.2",
     "better-sqlite3": "^12.6.2",
     "dotenv": "^17.2.4",
-    "grammy": "^1.39.3",
+    "grammy": "^1.40.0",
     "markov-strings": "^3.0.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.2",
-    "@types/node": "^22.19.9",
+    "@types/node": "^22.19.10",
     "esbuild": "^0.27.3",
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",
@@ -35,6 +35,6 @@
     "prettier": "^3.8.1",
     "prisma": "^6.19.2",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.54.0"
+    "typescript-eslint": "^8.55.0"
   }
 }
