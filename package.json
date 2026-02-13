@@ -21,7 +21,7 @@
     "@prisma/adapter-better-sqlite3": "^6.19.2",
     "@prisma/client": "^6.19.2",
     "better-sqlite3": "^12.6.2",
-    "dotenv": "^17.2.4",
+    "dotenv": "^17.3.1",
     "grammy": "^1.40.0",
     "markov-strings": "^3.0.2"
   },
