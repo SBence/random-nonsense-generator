@@ -314,10 +314,10 @@
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.15.tgz#596a1747233694d50f6ad8a7869fcb6f56cf5841"
   integrity sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==
 
-"@types/node@^22.19.11":
-  version "22.19.11"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-22.19.11.tgz#7e1feaad24e4e36c52fa5558d5864bb4b272603e"
-  integrity sha512-BH7YwL6rA93ReqeQS1c4bsPpcfOmJasG+Fkr6Y59q83f9M1WcBRHR2vM+P9eOisYRcN3ujQoiZY8uk5W+1WL8w==
+"@types/node@^22.19.12":
+  version "22.19.12"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-22.19.12.tgz#c83b74c80429fcccba25f6d6c4c7d1753a9cabb2"
+  integrity sha512-0QEp0aPJYSyf6RrTjDB7HlKgNMTY+V2C7ESTaVt6G9gQ0rPLzTGz7OF2NXTLR5vcy7HJEtIUsyWLsfX0kTqJBA==
   dependencies:
     undici-types "~6.21.0"
 
@@ -938,10 +938,10 @@ globals@^16.5.0:
   resolved "https://registry.yarnpkg.com/globals/-/globals-16.5.0.tgz#ccf1594a437b97653b2be13ed4d8f5c9f850cac1"
   integrity sha512-c/c15i26VrJ4IRt5Z89DnIzCGDn9EcebibhAOjw5ibqEHsE1wLUgkPn9RDmNcUKyU87GeaL633nyJ+pplFR2ZQ==
 
-grammy@^1.40.0:
-  version "1.40.0"
-  resolved "https://registry.yarnpkg.com/grammy/-/grammy-1.40.0.tgz#c47beec9d0031ceca56e91880bf21771e1a9e507"
-  integrity sha512-ssuE7fc1AwqlUxHr931OCVW3fU+oFDjHZGgvIedPKXfTdjXvzP19xifvVGCnPtYVUig1Kz+gwxe4A9M5WdkT4Q==
+grammy@^1.40.1:
+  version "1.40.1"
+  resolved "https://registry.yarnpkg.com/grammy/-/grammy-1.40.1.tgz#1292262cb9de962157b2db7f264ff60e4898f3bc"
+  integrity sha512-bTe8SWXD8/Sdt2LGAAAsFGhuxI9RG8zL2gGk3V42A/RxriPqBQqwMGoNSldNK1qIFD2EaVuq7NQM8+ZAmNgHLw==
   dependencies:
     "@grammyjs/types" "3.24.0"
     abort-controller "^3.0.0"
