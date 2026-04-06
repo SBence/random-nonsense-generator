@@ -205,10 +205,10 @@
   resolved "https://registry.yarnpkg.com/@grammyjs/menu/-/menu-1.3.1.tgz#f807ae07305c30356f636e3f4ffa4bae3b98662b"
   integrity sha512-HJslY/n76T1Ar5qDDhNtjLs+PpcrlB9aGsXu3CJHLt147DC3K3lpiRvRW/Xh9/x9hqYVw7KKbnvsQXVgzoU81Q==
 
-"@grammyjs/types@3.25.0":
-  version "3.25.0"
-  resolved "https://registry.yarnpkg.com/@grammyjs/types/-/types-3.25.0.tgz#c69a966bf1d0dd77e062c3e069512af62b8855f2"
-  integrity sha512-iN9i5p+8ZOu9OMxWNcguojQfz4K/PDyMPOnL7PPCON+SoA/F8OKMH3uR7CVUkYfdNe0GCz8QOzAWrnqusQYFOg==
+"@grammyjs/types@3.26.0":
+  version "3.26.0"
+  resolved "https://registry.yarnpkg.com/@grammyjs/types/-/types-3.26.0.tgz#24874cb81bf4201b5ac3a5811342478b889d0d3b"
+  integrity sha512-jlnyfxfev/2o68HlvAGRocAXgdPPX5QabG7jZlbqC2r9DZyWBfzTlg+nu3O3Fy4EhgLWu28hZ/8wr7DsNamP9A==
 
 "@humanfs/core@^0.19.1":
   version "0.19.1"
@@ -661,10 +661,10 @@ dotenv@^16.6.1:
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-16.6.1.tgz#773f0e69527a8315c7285d5ee73c4459d20a8020"
   integrity sha512-uBq4egWHTcTt33a72vpSG0z3HnPuIl6NqYcTrKEg2azoEyl2hpW0zqlxysq2pK9HlDIHyHyakeYaYnSAwd8bow==
 
-dotenv@^17.4.0:
-  version "17.4.0"
-  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-17.4.0.tgz#9a5de24d7112a889b4b179ffbe83933298c41d37"
-  integrity sha512-kCKF62fwtzwYm0IGBNjRUjtJgMfGapII+FslMHIjMR5KTnwEmBmWLDRSnc3XSNP8bNy34tekgQyDT0hr7pERRQ==
+dotenv@^17.4.1:
+  version "17.4.1"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-17.4.1.tgz#d8e2179fe287365ef3aecb9459668454168eda88"
+  integrity sha512-k8DaKGP6r1G30Lx8V4+pCsLzKr8vLmV2paqEj1Y55GdAgJuIqpRp5FfajGF8KtwMxCz9qJc6wUIJnm053d/WCw==
 
 effect@3.21.0:
   version "3.21.0"
@@ -938,12 +938,12 @@ globals@^16.5.0:
   resolved "https://registry.yarnpkg.com/globals/-/globals-16.5.0.tgz#ccf1594a437b97653b2be13ed4d8f5c9f850cac1"
   integrity sha512-c/c15i26VrJ4IRt5Z89DnIzCGDn9EcebibhAOjw5ibqEHsE1wLUgkPn9RDmNcUKyU87GeaL633nyJ+pplFR2ZQ==
 
-grammy@^1.41.1:
-  version "1.41.1"
-  resolved "https://registry.yarnpkg.com/grammy/-/grammy-1.41.1.tgz#8de850aea74d7a8f92fdf51707945e59b09071d4"
-  integrity sha512-wcHAQ1e7svL3fJMpDchcQVcWUmywhuepOOjHUHmMmWAwUJEIyK5ea5sbSjZd+Gy1aMpZeP8VYJa+4tP+j1YptQ==
+grammy@^1.42.0:
+  version "1.42.0"
+  resolved "https://registry.yarnpkg.com/grammy/-/grammy-1.42.0.tgz#033c6643158a98384b1d6c3ecedeb5b51c9e499e"
+  integrity sha512-1AdCge+AkjSdp2FwfICSFnVbl8Mq3KVHJDy+DgTI9+D6keJ0zWALPRKas5jv/8psiCzL4N2cEOcGW7O45Kn39g==
   dependencies:
-    "@grammyjs/types" "3.25.0"
+    "@grammyjs/types" "3.26.0"
     abort-controller "^3.0.0"
     debug "^4.4.3"
     node-fetch "^2.7.0"
