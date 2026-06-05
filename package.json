@@ -23,7 +23,7 @@
     "better-sqlite3": "^12.10.0",
     "dotenv": "^17.4.2",
     "grammy": "^1.43.0",
-    "markov-strings": "^3.0.2"
+    "markov-strings": "^3.0.4"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.4",
