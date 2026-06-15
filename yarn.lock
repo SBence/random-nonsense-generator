@@ -205,10 +205,10 @@
   resolved "https://registry.yarnpkg.com/@grammyjs/menu/-/menu-1.3.1.tgz#f807ae07305c30356f636e3f4ffa4bae3b98662b"
   integrity sha512-HJslY/n76T1Ar5qDDhNtjLs+PpcrlB9aGsXu3CJHLt147DC3K3lpiRvRW/Xh9/x9hqYVw7KKbnvsQXVgzoU81Q==
 
-"@grammyjs/types@3.27.3":
-  version "3.27.3"
-  resolved "https://registry.yarnpkg.com/@grammyjs/types/-/types-3.27.3.tgz#93c8640d1ae5400e304950a1d89e7716e025ec78"
-  integrity sha512-yUKMLliGsGbnxu96YUJ7km7B0zy4PzeH/Jvti5705R/LeKDMqkDV4DckMSt+OrliWQpTwQljHE0QLol5zgxBkg==
+"@grammyjs/types@3.28.0":
+  version "3.28.0"
+  resolved "https://registry.yarnpkg.com/@grammyjs/types/-/types-3.28.0.tgz#6fae33ef8d8fa8804e1d25bdb39ddaa3210ed134"
+  integrity sha512-4JvXCdxRZHCje0M4gHzLwtB4bLno3WD28xd8CNfk4POWIu73BFnSvGeW6OQ5gPem4eYTEwkD9yDaXssixl6tMQ==
 
 "@humanfs/core@^0.19.1":
   version "0.19.1"
@@ -479,10 +479,10 @@ better-sqlite3@^11.9.0:
     bindings "^1.5.0"
     prebuild-install "^7.1.1"
 
-better-sqlite3@^12.10.0:
-  version "12.10.0"
-  resolved "https://registry.yarnpkg.com/better-sqlite3/-/better-sqlite3-12.10.0.tgz#bde622d14a18008583a53bc53501ae98f1a12221"
-  integrity sha512-CyzaZRQKyHkB2ZInfTTl2nvT33EbDpjkLEbE8/Zck3Ll6O0qqvuGdrJ45HgtH+HykRg88ITY3AdreBGN70aBSQ==
+better-sqlite3@^12.10.1:
+  version "12.10.1"
+  resolved "https://registry.yarnpkg.com/better-sqlite3/-/better-sqlite3-12.10.1.tgz#1fedf77460210c83d5140fb700c81700964a1a24"
+  integrity sha512-HfFtzCqnSfwB3+HroF6PSKzyh+7RfNMGPCzHFUZXRlvrPCb4P3cvxKZNN43Sr7IrkofqQZM+gIvffGpA8VvqgA==
   dependencies:
     bindings "^1.5.0"
     prebuild-install "^7.1.1"
@@ -943,12 +943,12 @@ globals@^16.5.0:
   resolved "https://registry.yarnpkg.com/globals/-/globals-16.5.0.tgz#ccf1594a437b97653b2be13ed4d8f5c9f850cac1"
   integrity sha512-c/c15i26VrJ4IRt5Z89DnIzCGDn9EcebibhAOjw5ibqEHsE1wLUgkPn9RDmNcUKyU87GeaL633nyJ+pplFR2ZQ==
 
-grammy@^1.43.0:
-  version "1.43.0"
-  resolved "https://registry.yarnpkg.com/grammy/-/grammy-1.43.0.tgz#1c9f709d77a7f054c30b064963e96d505495e52f"
-  integrity sha512-7dYm06A945mXuIk/5HUlSjeyIYChW8vCEiU2dkOKKqJJzwAWxTkCc91Eqbz7TgODh2rtFFKWI/fekowWHOkmjQ==
+grammy@^1.44.0:
+  version "1.44.0"
+  resolved "https://registry.yarnpkg.com/grammy/-/grammy-1.44.0.tgz#f6e65c4b53ac52be4017009b153e08f04bac4b4e"
+  integrity sha512-gGVykS5+c5f1tPV97LuU6IDRMawE2NzpwM9pNz58HQ35IZXDnYL3VOLvNzYognPSeBIOSzQXRu5w96V0aY8y8A==
   dependencies:
-    "@grammyjs/types" "3.27.3"
+    "@grammyjs/types" "3.28.0"
     abort-controller "^3.0.0"
     debug "^4.4.3"
     node-fetch "^2.7.0"
